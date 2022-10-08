@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Fetcher</title>
+  <style>
+    :root {
+      --baseColor: #606468;
+    }
+    .grid {
+      inline-size: 90%;
+      margin-inline: auto;
+      max-inline-size: 20rem;
+      display: grid;
+    }
+    .hidden {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .icon {
+      block-size: 1em;
+      display: inline-block;
+      fill: var(--iconFill);
+      inline-size: 1em;
+      vertical-align: middle;
+    }
+
+    :root {
+      --htmlFontSize: 100%;
+
+      --bodyBackgroundColor: #2c3338;
+      --bodyColor: var(--baseColor);
+      --bodyFontFamily: "Open Sans";
+      --bodyFontFamilyFallback: sans-serif;
+      --bodyFontSize: 0.875rem;
+      --bodyFontWeight: 400;
+      --bodyLineHeight: 1.5;
+    }
+    * {
+      box-sizing: inherit;
+    }
+    html {
+      box-sizing: border-box;
+      font-size: var(--htmlFontSize);
+    }
+    body {
+      background-color: #342d34;
+      color: white;
+      font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
+      font-size: var(--bodyFontSize);
+      font-weight: var(--bodyFontWeight);
+      line-height: var(--bodyLineHeight);
+      margin: 0;
+      min-block-size: 100vh;
+      display: grid;
+      place-items: center;
+    }
+    :root {
+      --anchorColor: #eee;
+    }
+    a {
+      color: var(--anchorColor);
+      outline: 0;
+      text-decoration: none;
+    }
+    a:focus,
+    a:hover {
+      text-decoration: underline;
+    }
+    :root {
+      --formGap: 0.875rem;
+    }
+    input {
+      background-image: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      margin: 0;
+      outline: 0;
+      padding: 0;
+      transition: background-color 0.3s;
+    }
+    input[type="text"] {
+      background-image: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      margin: 0;
+      outline: 0;
+      padding: 0;
+      transition: background-color 0.3s;
+    }
+    select,
+    option {
+      background-image: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      margin: 0;
+      outline: 0;
+      padding: 0;
+      transition: background-color 0.3s;
+    }
+    input[type="submit"] {
+      cursor: pointer;
+    }
+    input[type="text"],
+    select,
+    option,
+    input[type="submit"] {
+      inline-size: 100%;
+    }
+    :root {
+      --loginBorderRadus: 0.25rem;
+      --loginColor: #eee;
+      --loginInputBackgroundColor: #3b4148;
+      --loginInputHoverBackgroundColor: #434a52;
+      --loginLabelBackgroundColor: #363b41;
+      --loginSubmitBackgroundColor: #ea4c88;
+      --loginSubmitColor: #eee;
+      --loginSubmitHoverBackgroundColor: #d44179;
+    }
+    input[type="text"],
+    select,
+    option,
+    input[type="submit"] {
+      border-radius: var(--loginBorderRadus);
+      padding: 1rem;
+    }
+    input[type="text"],
+    option,
+    select {
+      background-color: var(--loginInputBackgroundColor);
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    input[type="text"]:focus,
+    input[type="text"]:hover {
+      background-color: var(--loginInputHoverBackgroundColor);
+    }
+    input[type="submit"] {
+      background-color: #d75821;
+      color: var(--loginSubmitColor);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    input[type="submit"]:focus,
+    input[type="submit"]:hover {
+      background-color: #d75821;
+    }
+    p {
+      margin-block: 1.5rem;
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    function isValidURL(string) {
+      var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+      return (res !== null)
+    }
+
+    function startIT() {
+
+      var myurl = document.getElementById("urltext").value;
+
+      if (myurl == "") {
+
+        alert("Please Enter URL");
+
+      }
+
+      else if (myurl !== "" && isValidURL(myurl) == true) {
+        grabFAV();
+      }
+
+      else {
+        alert("Please Enter Valid URL");
+      }
+
+    }
+
+    function grabFAV() {
+      var myurl = document.getElementById("urltext").value;
+      var myimg = document.getElementById("theimg");
+      var mysize = document.getElementById("size").value;
+      var duckapi = "https://icons.duckduckgo.com/ip3/";
+      var gapi = "https://s2.googleusercontent.com/s2/favicons?domain=";
+      if (mysize == "default") {
+        var h1 = "https://";
+        var h2 = "http://";
+
+        myurl = myurl.replace(h1, "");
+        myurl = myurl.replace(h2, "");
+
+        myimg.src = duckapi + myurl + ".ico";
+      }
+
+      else if (mysize == "16") {
+
+        myimg.src = gapi + myurl + "&sz=16";
+      }
+
+      else if (mysize == "32") {
+
+        myimg.src = gapi + myurl + "&sz=32";
+      }
+
+      else if (mysize == "48") {
+
+        myimg.src = gapi + myurl + "&sz=48";
+      }
+
+      else if (mysize == "64") {
+
+        myimg.src = gapi + myurl + "&sz=64";
+      }
+
+      else if (mysize == "128") {
+
+        myimg.src = gapi + myurl + "&sz=128";
+      }
+    }
+  </script>
+  <div class="grid">
+    <h2 align="center">Favicon Fetcher</h2>
+    <center> <img src="" id="theimg"></center><br>
+
+    <select id="size">
+      <option value="default">Default Size</option>
+      <option value="16">16x16</option>
+      <option value="32">32x32</option>
+      <option value="48">48x48</option>
+      <option value="64">64x64</option>
+      <option value="128">128x128</option>
+    </select><br><br>
+    <input type="text" placeholder="Enter URL" id="urltext">
+    <br><br>
+    <input type="submit" value="Fetch" onClick="startIT()">
+    <p>Developed By - <a href="">Shreya Malogi</a> | <a
+        href="https://www.linkedin.com/in/shreyamalogi/">LinkedIn</a></p>
+  </div>
+</body>
+
+</html>
